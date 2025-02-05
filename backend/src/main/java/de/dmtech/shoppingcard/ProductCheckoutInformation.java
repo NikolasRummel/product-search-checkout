@@ -11,5 +11,6 @@ public class ProductCheckoutInformation {
 
     private int count;
     private String productName;
+    private String dan;
     private double price;
 }

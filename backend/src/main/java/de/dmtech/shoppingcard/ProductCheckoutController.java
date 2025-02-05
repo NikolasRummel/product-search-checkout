@@ -31,7 +31,8 @@ public class ProductCheckoutController {
     }
 
     @DeleteMapping
-    public void deleteProductFromShoppingCart(@RequestBody ProductInformation information) {
-        productCheckoutService.remove(information);
+    public void deleteProductFromShoppingCart(@RequestParam String dan) {
+        System.out.println("removed product from the shopping cart: " + dan);
+        productCheckoutService.remove(dan);
     }
 }

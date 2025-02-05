@@ -28,12 +28,23 @@ public class ProductCheckoutService {
         System.out.println(productInformation);
     }
 
-    public void remove(ProductInformation productInformation) {
-        if (productStore.containsKey(productInformation)) {
-            productStore.remove(productInformation);
-        } else {
-            throw new RuntimeException("Product not found");
-        }
+    public void remove(String dan) {
+        this.productStore
+                .keySet()
+                .stream()
+                .filter(information -> information.getDan().equals(dan))
+                .findFirst().
+                ifPresent(information -> {
+                    if (productStore.containsKey(information)) {
+                        if (productStore.get(information) > 1) {
+                            productStore.put(information, productStore.get(information) - 1);
+                        } else {
+                            productStore.remove(information);
+                        }
+                    } else {
+                        throw new RuntimeException("Product not found");
+                    }
+                });
     }
 
     public ProductCheckoutBill checkoutInformationList() {
@@ -43,6 +54,7 @@ public class ProductCheckoutService {
             productCheckoutInformationList.add(new ProductCheckoutInformation(
                     count,
                     productInformation.getName(),
+                    productInformation.getDan(),
                     count * Double.parseDouble(productInformation.getPrice().getFormattedValue().split(" ")[0].replace(",", "."))
             ));
         });
