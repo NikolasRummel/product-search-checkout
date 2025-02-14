@@ -1,9 +1,7 @@
-import ProductSearch from "@/components/ProductSearch";
-
 export default function Home() {
   return (
     <div className="">
-      <ProductSearch/>
+        <h1>Product Suche</h1>
     </div>
   );
 }
